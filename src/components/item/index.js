@@ -48,7 +48,7 @@ export default function Item(props) {
         <div className={classNames(styles.item, {
             [styles.itemNoCarrinho]: carrinho
         })}>
-            <div className={styles['item.imagem']}>
+            <div className={styles['item-imagem']}>
                 <img src={foto} alt={titulo} />
             </div>
             <div className={styles['item-descricao']}>
