@@ -4,14 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from 'components/button';
 import { useForm } from 'react-hook-form';
 import { cadastrarItem } from 'store/reducers/itens';
+import { useParams } from 'react-router-dom';
 
 export default function Anuncie(){
     const dispatch = useDispatch();
+    const { nomeCategoria = '' } = useParams();
     const categorias = useSelector(state => state.categorias.map(({ nome, id }) => ({ nome, id })));
     //função do componentes de UseState já configurado com o UseEffect
     const { register, handleSubmit, formState } = useForm({
         defaultValues: {
-            categoria: ''
+            categoria: nomeCategoria
         }
     });
 
@@ -34,7 +36,11 @@ export default function Anuncie(){
                 {errors.nome && <span className={styles['mensagem-erro']}> Informar descrição do produto! </span>}
                 <input className={errors.nome ? styles['input-erro'] : ''} {...register('foto', { required: true })} placeholder='url da imagem do protudo' alt='url da imagem do protudo'/>
                 {errors.nome && <span className={styles['mensagem-erro']}> Enviar url para obter foto do produto!</span>}
-                <select className={errors.nome ? styles['input-erro'] : ''} {...register('categoria', { required: true })}>
+                <select 
+                    className={errors.nome ? styles['input-erro'] : ''} 
+                    {...register('categoria', { required: true })}
+                    disabled={nomeCategoria}
+                >
                     <option value='' disabled >Selecione a categoria</option>
                     {categorias.map(categoria => (
                         <option key={categoria.id} value={categoria.id}>
