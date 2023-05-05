@@ -1,11 +1,12 @@
 import styles from './tituloComImagem.module.scss';
 
-export default function TituloComImagem({titulo, description, imagem, className}) {
+export default function TituloComImagem({titulo, description, imagem, className, children}) {
     return (
         <div className={`${className} ${styles.header}`}>
             <div className={styles['header-texto']}>
                 <h1>{titulo}</h1>
                 <h2>{description}</h2>
+                {children}
             </div>
             <div className={styles['header-imagem']}>
                 <img 
